@@ -18,16 +18,26 @@ class BookController extends Controller
         if (!is_null($request->route('lang'))) {
             $lang = $request->route('lang');
         } else {
-            $lang = "";
+            $lang = "English";
+        }
+
+        if (!is_null($request->author)) {
+            $auth = $request->author;
+        } else {
+            $auth = "";
         }
 
         $languages = Book::select(['Language'])->distinct()->get();
-        $booksByLang = Book::where('Language', $lang)->get();
+        $authors = Book::where('Language', 'LIKE', '%'.$lang.'%')->select(['Author'])->distinct()->get();
+
+        $booksFiltered = Book::where('Language', $lang)/*->where('Author', $auth)*/->get();
 
         return view('books', [
             'languages'=> $languages,
+            'authors'=> $authors,
             'currLang'=> $lang,
-            'booksByLang'=> $booksByLang,
+            'currAuth'=> $auth,
+            'booksFiltered'=> $booksFiltered,
         ]);
     }
 }
