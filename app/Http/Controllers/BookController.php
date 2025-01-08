@@ -14,7 +14,7 @@ class BookController extends Controller
         ]);
     }
 
-    public function listByLanguage(Request $request){
+    public function listBooks(Request $request){
         if (!is_null($request->route('lang'))) {
             $lang = $request->route('lang');
         } else {
@@ -28,7 +28,7 @@ class BookController extends Controller
         }
 
         $languages = Book::select(['Language'])->distinct()->get();
-        $authors = Book::where('Language', 'LIKE', '%'.$lang.'%')->select(['Author'])->distinct()->get();
+        $authors = Book::where('Language', $lang)->select(['Author'])->distinct()->get();
 
         $booksFiltered = Book::where('Language', $lang)->where('Author','LIKE', '%'.$auth.'%')->get();
 

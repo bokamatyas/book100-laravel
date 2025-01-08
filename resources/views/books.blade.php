@@ -26,15 +26,14 @@
             <div class="col-12 col-md-10">
                 <div class="container mb-5 ms-0 col-3">
                     <label class="form-label" for="author">Author</label>
-                    <form action="">
-                        @csrf
+                    <form method="GET" >
                         <select class="form-control" name="author" id="author" onchange="this.form.submit()">
                             <option value="">-- Select Author --</option>
                             @foreach ($authors as $auth)
-                                <option {{ old('author') == $auth ? 'selected' : '' }}  value="{{ $auth->Author }}">{{ $auth->Author }}</option>
+                            <option  @if ($currAuth == $auth->Author) selected @endif value="{{ $auth->Author }}">{{ $auth->Author }}</option>
                             @endforeach
                         </select>
-
+                        {{-- @csrf --}}
                     </form>
                 </div>
                 <div class="container">
