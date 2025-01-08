@@ -30,7 +30,7 @@ class BookController extends Controller
         $languages = Book::select(['Language'])->distinct()->get();
         $authors = Book::where('Language', 'LIKE', '%'.$lang.'%')->select(['Author'])->distinct()->get();
 
-        $booksFiltered = Book::where('Language', $lang)/*->where('Author', $auth)*/->get();
+        $booksFiltered = Book::where('Language', $lang)->where('Author','LIKE', '%'.$auth.'%')->get();
 
         return view('books', [
             'languages'=> $languages,
