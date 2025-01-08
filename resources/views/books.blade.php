@@ -27,7 +27,7 @@
                 <div class="container mb-5 ms-0 col-3">
                     <label class="form-label" for="author">Author</label>
                     <form method="GET" >
-                        <select class="form-control" name="author" id="author" onchange="this.form.submit()">
+                        <select class="form-control" name="author" id="author">
                             <option value="">-- Select Author --</option>
                             @foreach ($authors as $auth)
                             <option  @if ($currAuth == $auth->Author) selected @endif value="{{ $auth->Author }}">{{ $auth->Author }}</option>
@@ -35,6 +35,7 @@
                         </select>
                         {{-- @csrf --}}
                     </form>
+                    <button class="btn btn-success mx-auto" onclick="this.form.submit()">Search</button>
                 </div>
                 <div class="container">
                     <table class="table table-bordered table-sm table-info">

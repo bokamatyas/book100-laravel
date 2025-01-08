@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index(){
-        $books = Book::all();
-        return view('home', [
-            'books'=>$books
-        ]);
-    }
-
     public function listBooks(Request $request){
         if (!is_null($request->route('lang'))) {
             $lang = $request->route('lang');
